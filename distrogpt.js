@@ -93,13 +93,16 @@ function addProducts() {
 
 addToCartButton.addEventListener('click', function() {
     const dialog = document.getElementById("modal-body");
+    while (dialog.firstChild) {
+        dialog.removeChild(dialog.firstChild);
+    }
     const updatedDialog = document.createElement("p");
     updatedDialog.classList.add("wrap");
     dialog.appendChild(updatedDialog);
     const quantity = document.getElementById(this.value).value;
     const productCode = quantity + this.value;
     purchaseList.push(productCode); 
-    updatedDialog.appendChild(document.createTextNode(purchaseList))   
+    updatedDialog.appendChild(document.createTextNode(purchaseList));   
 }, false);
 
         newCol.appendChild(newProduct);
@@ -118,16 +121,10 @@ addToCartButton.addEventListener('click', function() {
 
 addProducts();
 
+
+
 const modalButton = document.getElementById("exampleModal");
 
 modalButton.addEventListener('click', function() {
-    const modalBody = document.getElementById("modal-body");
-    while (modalBody.firstChild) {
-        modalBody.removeChild(modalBody.firstChild);
-    }
-    $("#exampleModal.btn").click();
     localStorage.setItem("products", purchaseList);
 }, false);
-
-
-
