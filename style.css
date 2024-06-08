@@ -1,0 +1,29 @@
+body {
+    padding-top: 5em !important;
+}
+
+.row {
+    padding: 10px;  
+}
+
+.row {
+    border: 1px solid black;
+}
+
+.col-sm {
+    border: 1px solid red;
+}
+
+.navbar-custom {
+    height: 4em;
+}
+
+.product-image {
+    width: 75%;
+}
+
+.quantity-input {
+    width: 30%;
+    margin: 1em;
+    text-align:center;
+}
