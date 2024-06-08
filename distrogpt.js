@@ -8,13 +8,13 @@ const patches = [
     {
         band: "Leftover Crack 2",
         price: "2.00",
-        image: "loc.jpg",
+        image: "loc2.png",
         sku: "L02"
     },
     {
         band: "Leftover Crack 3",
         price: "2.00",
-        image: "loc.jpg",
+        image: "loc2.png",
         sku: "L03"
     },
     {
@@ -26,6 +26,11 @@ const patches = [
 ];
 
 let purchaseList = [];
+
+if (localStorage.getItem("products")) {
+    purchaseList = localStorage.getItem("products");
+    purchaseList = purchaseList.split(",");
+}
 
 function addProducts() {
     const patchContainer = document.getElementById("patches");
@@ -78,19 +83,24 @@ function addProducts() {
         addToCart.classList.add("col-12", "d-flex", "justify-content-center", "text-center");
         const addToCartButton = document.createElement("button");
         addToCartButton.classList.add("btn", "btn-dark");
+        addToCartButton.setAttribute("data-bs-toggle", "modal");
+        addToCartButton.setAttribute("data-bs-target", "#exampleModal");
         addToCartButton.setAttribute('value', patch.sku);
         addToCartButton.appendChild(document.createTextNode("Add to Cart"));
         addToCart.appendChild(addToCartButton);
         newProduct.appendChild(addToCart);
+        
 
-        addToCartButton.addEventListener('click', function() {
-            const quantity = document.getElementById(this.value).value;
-            const productCode = quantity + this.value;
-            purchaseList.push(productCode);
-            alert(productCode);
-            alert(purchaseList);     
-        }, false);
-
+addToCartButton.addEventListener('click', function() {
+    const dialog = document.getElementById("modal-body");
+    const updatedDialog = document.createElement("p");
+    updatedDialog.classList.add("wrap");
+    dialog.appendChild(updatedDialog);
+    const quantity = document.getElementById(this.value).value;
+    const productCode = quantity + this.value;
+    purchaseList.push(productCode); 
+    updatedDialog.appendChild(document.createTextNode(purchaseList))   
+}, false);
 
         newCol.appendChild(newProduct);
         newRow.appendChild(newCol);
@@ -107,3 +117,17 @@ function addProducts() {
 }
 
 addProducts();
+
+const modalButton = document.getElementById("exampleModal");
+
+modalButton.addEventListener('click', function() {
+    const modalBody = document.getElementById("modal-body");
+    while (modalBody.firstChild) {
+        modalBody.removeChild(modalBody.firstChild);
+    }
+    $("#exampleModal.btn").click();
+    localStorage.setItem("products", purchaseList);
+}, false);
+
+
+

@@ -24,3 +24,8 @@ body {
     margin: 1em;
     text-align:center;
 }
+
+.wrap {
+    margin: auto;
+    word-wrap: break-word;
+}

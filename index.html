@@ -43,11 +43,6 @@
     </div>
 
 
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-    Launch demo modal
-  </button>
-  
   <!-- Modal -->
   <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -56,11 +51,11 @@
           <h5 class="modal-title" id="exampleModalLabel">Added to Cart!</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <div class="modal-body">
-          ...
+        <div class="modal-body" id="modal-body">
+            <p></p>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-primary" data-bs-dismiss="modal">OK</button>
+          <button type="button" class="btn btn-primary" id="clear-modal" data-bs-dismiss="modal">OK</button>
         </div>
       </div>
     </div>
@@ -68,6 +63,7 @@
 
     <script src="bootstrap.bundle.js"></script>
     <script src="distrogpt.js"></script>
+    <script src="jquery-3.7.1.min.js"></script>
 </body>
 
 </html>
