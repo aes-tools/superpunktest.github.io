@@ -124,13 +124,29 @@ function createCart() {
                 const cartBody = document.getElementById("cart"),
                     cartRow = document.createElement("div"),
                     cartItemImage = document.createElement("div"),
-                    productImage = document.createElement("img");
-                cartRow.classList.add("row");
+                    productImage = document.createElement("img"), 
+                    titleAndPriceRow = document.createElement("div"),
+                    cartItemTitle = document.createElement("div"),
+                    productTitle = document.createElement("p"),
+                    cartItemPrice = document.createElement("div"),
+                    productPrice = document.createElement("p");
+
+                cartRow.classList.add("row", "align-items-center", "text-center");
                 cartItemImage.classList.add("col-4");
+                cartItemTitle.classList.add("col-12");
+                titleAndPriceRow.classList.add("row", "col-4");
+                cartItemPrice.classList.add("col-12");
                 productImage.setAttribute("src", "images/patches/" + value.image);
                 productImage.classList.add("img-fluid");
                 cartItemImage.append(productImage);
+                productTitle.appendChild(document.createTextNode(value.band));
+                cartItemTitle.append(productTitle);
+                titleAndPriceRow.append(cartItemTitle);
+                productPrice.appendChild(document.createTextNode("$" + value.price));
+                cartItemPrice.append(productPrice);
+                titleAndPriceRow.append(cartItemPrice);
                 cartRow.append(cartItemImage);
+                cartRow.append(titleAndPriceRow);
                 cartBody.append(cartRow);
                //document.getElementById("cart").append(value.band + " ");
             }
