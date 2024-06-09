@@ -134,7 +134,7 @@ function createCart() {
                 cartRow.classList.add("row", "align-items-center", "text-center");
                 cartItemImage.classList.add("col-4");
                 cartItemTitle.classList.add("col-12");
-                titleAndPriceRow.classList.add("row", "col-4");
+                titleAndPriceRow.classList.add("row", "col-8");
                 cartItemPrice.classList.add("col-12");
                 productImage.setAttribute("src", "images/patches/" + value.image);
                 productImage.classList.add("img-fluid");
