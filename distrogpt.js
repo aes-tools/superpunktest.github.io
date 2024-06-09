@@ -1,31 +1,25 @@
-const patches = [
-    {
-        band: "Leftover Crack",
-        price: "2.00",
-        image: "loc.jpg",
-        sku: "L01"
-    },
-    {
-        band: "Leftover Crack 2",
-        price: "2.00",
-        image: "loc2.png",
-        sku: "L02"
-    },
-    {
-        band: "Leftover Crack 3",
-        price: "2.00",
-        image: "loc2.png",
-        sku: "L03"
-    },
-    {
-        band: "Leftover Crack 4",
-        price: "2.00",
-        image: "loc.jpg",
-        sku: "L04"
-    },
-];
+let patches = [];
 
-let purchaseList;
+async function patchesListing() {
+    let shopContentsResponse = await fetch('./patches.json');
+    let shopContents = await shopContentsResponse.json();
+    console.log(shopContents);
+    patches = shopContents;
+    const currentPage = document.title.split(" - ").slice(1)[0];
+
+    if (currentPage == "Patches" || currentPage == "Shirts") {
+        addProducts();
+        const modalButton = document.getElementById("exampleModal");
+
+        modalButton.addEventListener('click', function () {
+            localStorage.setItem("products", JSON.stringify(purchaseList));
+        }, false);
+    } else if (currentPage == "Cart") {
+        createCart();
+    }
+}
+
+patchesListing();
 
 if (localStorage.getItem("products")) {
     purchaseList = localStorage.getItem("products");
@@ -111,7 +105,6 @@ function addProducts() {
 
         newCol.appendChild(newProduct);
         newRow.appendChild(newCol);
-
         if (i % 2 === 0) {
             patchContainer.appendChild(newRow);
         } else {
@@ -123,13 +116,28 @@ function addProducts() {
     }
 }
 
-addProducts();
+function createCart() {
+    for (const key in purchaseList) {
+     //   document.getElementById("cart").append(purchaseList[key] + key + ",");
+        for (const value of patches) {
+            if (value.sku == key) {
+                const cartBody = document.getElementById("cart"),
+                    cartRow = document.createElement("div"),
+                    cartItemImage = document.createElement("div"),
+                    productImage = document.createElement("img");
+                cartRow.classList.add("row");
+                cartItemImage.classList.add("col-4");
+                productImage.setAttribute("src", "images/patches/" + value.image);
+                productImage.classList.add("img-fluid");
+                cartItemImage.append(productImage);
+                cartRow.append(cartItemImage);
+                cartBody.append(cartRow);
+               //document.getElementById("cart").append(value.band + " ");
+            }
+        }
+    }
+}
 
-
-
-const modalButton = document.getElementById("exampleModal");
-
-
-modalButton.addEventListener('click', function () {
-    localStorage.setItem("products", JSON.stringify(purchaseList));
-}, false);
+/*
+find items that are in purchase list and match them to item list based on object key value
+list each one on their own row on the cart page, pulling info from item array (images, patch name, price) and purchaseList info (quantity)*/
