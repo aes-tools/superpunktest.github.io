@@ -129,13 +129,18 @@ function createCart() {
                     cartItemTitle = document.createElement("div"),
                     productTitle = document.createElement("p"),
                     cartItemPrice = document.createElement("div"),
-                    productPrice = document.createElement("p");
+                    productPrice = document.createElement("p"),
+                    quantityAndButtonRow = document.createElement("div"),
+                    cartQuantityBox = document.createElement("div"),
+                    productQuantityBox = document.createElement("input");
 
                 cartRow.classList.add("row", "align-items-center", "text-center");
                 cartItemImage.classList.add("col-4");
                 cartItemTitle.classList.add("col-12");
                 titleAndPriceRow.classList.add("row", "col-8");
                 cartItemPrice.classList.add("col-12");
+                quantityAndButtonRow.classList.add("row");
+                cartQuantityBox.classList.add("col-6");
                 productImage.setAttribute("src", "images/patches/" + value.image);
                 productImage.classList.add("img-fluid");
                 cartItemImage.append(productImage);
@@ -145,8 +150,17 @@ function createCart() {
                 productPrice.appendChild(document.createTextNode("$" + value.price));
                 cartItemPrice.append(productPrice);
                 titleAndPriceRow.append(cartItemPrice);
+                productQuantityBox.classList.add("cart-quantity-input", "form-control");
+                productQuantityBox.setAttribute('type', 'number');
+                productQuantityBox.setAttribute('value', purchaseList[key]);
+                productQuantityBox.setAttribute('id', value.sku);
+                cartQuantityBox.append(productQuantityBox);
+
+                quantityAndButtonRow.append(cartQuantityBox);
+
                 cartRow.append(cartItemImage);
                 cartRow.append(titleAndPriceRow);
+                cartRow.append(quantityAndButtonRow);
                 cartBody.append(cartRow);
                //document.getElementById("cart").append(value.band + " ");
             }

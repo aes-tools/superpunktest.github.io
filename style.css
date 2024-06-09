@@ -29,3 +29,9 @@ body {
     margin: auto;
     word-wrap: break-word;
 }
+
+.cart-quantity-input {
+    width: 30%;
+    margin: auto;
+    text-align:center;
+}
