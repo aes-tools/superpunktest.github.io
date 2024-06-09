@@ -25,11 +25,13 @@ const patches = [
     },
 ];
 
-let purchaseList = [];
+let purchaseList;
 
 if (localStorage.getItem("products")) {
     purchaseList = localStorage.getItem("products");
-    purchaseList = purchaseList.split(",");
+    purchaseList = JSON.parse(purchaseList);
+} else {
+    purchaseList = {};
 }
 
 function addProducts() {
@@ -89,21 +91,23 @@ function addProducts() {
         addToCartButton.appendChild(document.createTextNode("Add to Cart"));
         addToCart.appendChild(addToCartButton);
         newProduct.appendChild(addToCart);
-        
-
-addToCartButton.addEventListener('click', function() {
-    const dialog = document.getElementById("modal-body");
-    while (dialog.firstChild) {
-        dialog.removeChild(dialog.firstChild);
-    }
-    const updatedDialog = document.createElement("p");
-    updatedDialog.classList.add("wrap");
-    dialog.appendChild(updatedDialog);
-    const quantity = document.getElementById(this.value).value;
-    const productCode = quantity + this.value;
-    purchaseList.push(productCode); 
-    updatedDialog.appendChild(document.createTextNode(purchaseList));   
-}, false);
+        addToCartButton.addEventListener('click', function () {
+            const dialog = document.getElementById("modal-body");
+            while (dialog.firstChild) {
+                dialog.removeChild(dialog.firstChild);
+            }
+            const updatedDialog = document.createElement("p");
+            updatedDialog.classList.add("wrap");
+            dialog.appendChild(updatedDialog);
+            const quantity = document.getElementById(this.value).value;
+            const productCode = this.value;
+            if (purchaseList[productCode]) {
+                purchaseList[productCode] += parseInt(quantity);
+            } else {
+                purchaseList[productCode] = parseInt(quantity);
+            }
+            updatedDialog.appendChild(document.createTextNode(quantity + " x " + patch.band + " added to your list."));
+        }, false);
 
         newCol.appendChild(newProduct);
         newRow.appendChild(newCol);
@@ -125,6 +129,7 @@ addProducts();
 
 const modalButton = document.getElementById("exampleModal");
 
-modalButton.addEventListener('click', function() {
-    localStorage.setItem("products", purchaseList);
+
+modalButton.addEventListener('click', function () {
+    localStorage.setItem("products", JSON.stringify(purchaseList));
 }, false);
