@@ -117,116 +117,127 @@ function addProducts() {
 }
 
 function createCart() {
-    for (const key in purchaseList) {
-        //   document.getElementById("cart").append(purchaseList[key] + key + ",");
-        for (const value of patches) {
-            if (value.sku == key) {
-                const cartBody = document.getElementById("cart"),
-                    cartRow = document.createElement("div"),
-                    cartItemImage = document.createElement("div"),
-                    productImage = document.createElement("img"),
-                    titleAndPriceRow = document.createElement("div"),
-                    cartItemTitle = document.createElement("div"),
-                    productTitle = document.createElement("p"),
-                    cartItemPrice = document.createElement("div"),
-                    productPrice = document.createElement("p"),
-                    quantityAndButtonRow = document.createElement("div"),
-                    cartQuantityBox = document.createElement("div"),
-                    productQuantityBox = document.createElement("input"),
-                    cartItemButton = document.createElement("div"),
-                    productButton = document.createElement("button");
+    if (localStorage.getItem("products")) {
+        for (const key in purchaseList) {
+            //   document.getElementById("cart").append(purchaseList[key] + key + ",");
+            for (const value of patches) {
+                if (value.sku == key) {
+                    const cartBody = document.getElementById("cart"),
+                        cartRow = document.createElement("div"),
+                        cartItemImage = document.createElement("div"),
+                        productImage = document.createElement("img"),
+                        titleAndPriceRow = document.createElement("div"),
+                        cartItemTitle = document.createElement("div"),
+                        productTitle = document.createElement("p"),
+                        cartItemPrice = document.createElement("div"),
+                        productPrice = document.createElement("p"),
+                        quantityAndButtonRow = document.createElement("div"),
+                        cartQuantityBox = document.createElement("div"),
+                        productQuantityBox = document.createElement("input"),
+                        cartItemButton = document.createElement("div"),
+                        productButton = document.createElement("button");
 
-                cartRow.classList.add("row", "align-items-center", "text-center", "product-row", "justify-content-center");
-                cartItemImage.classList.add("col-4");
-                cartItemTitle.classList.add("col-12");
-                titleAndPriceRow.classList.add("row", "col-8");
-                cartItemPrice.classList.add("col-12");
-                quantityAndButtonRow.classList.add("row", "cart-button-row");
-                cartQuantityBox.classList.add("col-6");
-                productImage.setAttribute("src", "images/patches/" + value.image);
-                productImage.classList.add("img-fluid");
-                cartItemImage.append(productImage);
-                productTitle.appendChild(document.createTextNode(value.band));
-                cartItemTitle.append(productTitle);
-                titleAndPriceRow.append(cartItemTitle);
-                productPrice.appendChild(document.createTextNode("$" + value.price));
-                cartItemPrice.append(productPrice);
-                titleAndPriceRow.append(cartItemPrice);
-                productQuantityBox.classList.add("cart-quantity-input", "form-control");
-                productQuantityBox.setAttribute('type', 'number');
-                productQuantityBox.setAttribute('value', purchaseList[key]);
-                productQuantityBox.setAttribute('id', value.sku);
-                cartItemButton.classList.add("col-6");
-                productButton.classList.add("btn", "btn-dark", "cart-button");
-                productButton.setAttribute("data-bs-toggle", "modal");
-                productButton.setAttribute("data-bs-target", "#exampleModal");
-                productButton.setAttribute('value', value.sku);
-                productButton.appendChild(document.createTextNode("Update Cart"));
+                    cartRow.classList.add("row", "align-items-center", "text-center", "product-row", "justify-content-center");
+                    cartItemImage.classList.add("col-4");
+                    cartItemTitle.classList.add("col-12");
+                    titleAndPriceRow.classList.add("row", "col-8");
+                    cartItemPrice.classList.add("col-12");
+                    quantityAndButtonRow.classList.add("row", "cart-button-row");
+                    cartQuantityBox.classList.add("col-6");
+                    productImage.setAttribute("src", "images/patches/" + value.image);
+                    productImage.classList.add("img-fluid");
+                    cartItemImage.append(productImage);
+                    productTitle.appendChild(document.createTextNode(value.band));
+                    cartItemTitle.append(productTitle);
+                    titleAndPriceRow.append(cartItemTitle);
+                    productPrice.appendChild(document.createTextNode("$" + value.price));
+                    cartItemPrice.append(productPrice);
+                    titleAndPriceRow.append(cartItemPrice);
+                    productQuantityBox.classList.add("cart-quantity-input", "form-control");
+                    productQuantityBox.setAttribute('type', 'number');
+                    productQuantityBox.setAttribute('value', purchaseList[key]);
+                    productQuantityBox.setAttribute('id', value.sku);
+                    cartItemButton.classList.add("col-6");
+                    productButton.classList.add("btn", "btn-dark", "cart-button");
+                    productButton.setAttribute("data-bs-toggle", "modal");
+                    productButton.setAttribute("data-bs-target", "#exampleModal");
+                    productButton.setAttribute('value', value.sku);
+                    productButton.appendChild(document.createTextNode("Update Cart"));
 
-                cartQuantityBox.append(productQuantityBox);
-                cartItemButton.append(productButton);
+                    cartQuantityBox.append(productQuantityBox);
+                    cartItemButton.append(productButton);
 
-                productButton.addEventListener('click', function () {
-                    const dialog = document.getElementById("modal-body");
-                    while (dialog.firstChild) {
-                        dialog.removeChild(dialog.firstChild);
-                    }
-                    const updatedDialog = document.createElement("p");
-                    updatedDialog.classList.add("wrap");
-                    dialog.appendChild(updatedDialog);
-                    const quantity = document.getElementById(this.value).value;
-                    const productCode = this.value;
-                    if (purchaseList[productCode]) {
-                        if (quantity > 0) {
-                            purchaseList[productCode] = parseInt(quantity);
-                            localStorage.setItem("products", JSON.stringify(purchaseList));
-                            updatedDialog.appendChild(document.createTextNode("You now have " + quantity + " x " + value.band + " on your list."));
-                            console.log("success");
-                        } else {
-                            delete purchaseList[productCode];
-                            localStorage.setItem("products", JSON.stringify(purchaseList));
-                            while (document.getElementById("cart").firstChild) {
-                                document.getElementById("cart").removeChild(document.getElementById("cart").firstChild);
-                            }
-                            updatedDialog.appendChild(document.createTextNode(value.band + " removed from your list."));
-                            createCart();
+                    productButton.addEventListener('click', function () {
+                        const dialog = document.getElementById("modal-body");
+                        while (dialog.firstChild) {
+                            dialog.removeChild(dialog.firstChild);
                         }
-                    } else {
-                        purchaseList[productCode] = parseInt(quantity);
-                    }
-                }, false);
+                        const updatedDialog = document.createElement("p");
+                        updatedDialog.classList.add("wrap");
+                        dialog.appendChild(updatedDialog);
+                        const quantity = document.getElementById(this.value).value;
+                        const productCode = this.value;
 
-                quantityAndButtonRow.append(cartQuantityBox);
-                quantityAndButtonRow.append(cartItemButton);
+                        if (purchaseList[productCode]) {
+                            if (quantity > 0) {
+                                purchaseList[productCode] = parseInt(quantity);
+                                localStorage.setItem("products", JSON.stringify(purchaseList));
+                                updatedDialog.appendChild(document.createTextNode("You now have " + quantity + " x " + value.band + " on your list."));
+                                console.log("success");
+                            } else {
+                                delete purchaseList[productCode];
+                                localStorage.setItem("products", JSON.stringify(purchaseList));
+                                while (document.getElementById("cart").firstChild) {
+                                    document.getElementById("cart").removeChild(document.getElementById("cart").firstChild);
+                                }
+                                updatedDialog.appendChild(document.createTextNode(value.band + " removed from your list."));
+                                createCart();
+                            }
+                        } else {
+                            purchaseList[productCode] = parseInt(quantity);
+                        }
+                    }, false);
 
-                cartRow.append(cartItemImage);
-                cartRow.append(titleAndPriceRow);
-                cartRow.append(quantityAndButtonRow);
-                cartBody.append(cartRow);
-                //document.getElementById("cart").append(value.band + " ");
+                    quantityAndButtonRow.append(cartQuantityBox);
+                    quantityAndButtonRow.append(cartItemButton);
+
+                    cartRow.append(cartItemImage);
+                    cartRow.append(titleAndPriceRow);
+                    cartRow.append(quantityAndButtonRow);
+                    cartBody.append(cartRow);
+                    //document.getElementById("cart").append(value.band + " ");
+                }
             }
         }
+        if (localStorage.getItem("products").length > 2) {
+            const qrCodeButtonRow = document.createElement("row"),
+                qrCodeButtonCol = document.createElement("div"),
+                qrCodeButton = document.createElement("button");
+
+            qrCodeButtonRow.classList.add("row");
+            qrCodeButtonCol.classList.add("col-12");
+            qrCodeButton.classList.add("btn", "btn-dark", "cart-button");
+            qrCodeButton.setAttribute("data-bs-toggle", "modal");
+            qrCodeButton.setAttribute("data-bs-target", "#exampleModal");
+            qrCodeButton.setAttribute('value', purchaseList);
+            qrCodeButton.appendChild(document.createTextNode("Generate Checkout Code"));
+            qrCodeButtonCol.append(qrCodeButton);
+            qrCodeButtonRow.append(qrCodeButtonCol);
+            qrCodeButton.addEventListener('click', function () {
+                const dialog = document.getElementById("modal-body");
+                while (dialog.firstChild) {
+                    dialog.removeChild(dialog.firstChild);
+                }
+                const updatedDialog = document.createElement("p");
+                updatedDialog.classList.add("wrap");
+                dialog.appendChild(updatedDialog);
+
+            }, false);
+            document.getElementById("cart").append(qrCodeButton);
+        } else {
+            document.getElementById("cart").append(document.createElement("p").appendChild(document.createTextNode("Add items to your cart to begin.")));
+        }
+    } else {
+        document.getElementById("cart").append(document.createElement("p").appendChild(document.createTextNode("Add items to your cart to begin.")));
     }
 }
-
-/*
-addToCartButton.addEventListener('click', function () {
-    const dialog = document.getElementById("modal-body");
-    while (dialog.firstChild) {
-        dialog.removeChild(dialog.firstChild);
-    }
-    const updatedDialog = document.createElement("p");
-    updatedDialog.classList.add("wrap");
-    dialog.appendChild(updatedDialog);
-    const quantity = document.getElementById(this.value).value;
-    const productCode = this.value;
-    if (purchaseList[productCode]) {
-        purchaseList[productCode] += parseInt(quantity);
-    } else {
-        purchaseList[productCode] = parseInt(quantity);
-    }
-    updatedDialog.appendChild(document.createTextNode(quantity + " x " + patch.band + " added to your list."));
-}, false);*/
-/*
-find items that are in purchase list and match them to item list based on object key value
-list each one on their own row on the cart page, pulling info from item array (images, patch name, price) and purchaseList info (quantity)*/
