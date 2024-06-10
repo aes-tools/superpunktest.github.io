@@ -231,7 +231,12 @@ function createCart() {
                 const updatedDialog = document.createElement("p");
                 updatedDialog.classList.add("wrap");
                 dialog.appendChild(updatedDialog);
-
+                let cartList = [];
+                for (const key in purchaseList)  {
+                    cartList.push(purchaseList[key] + key);
+                }
+                new QRCode(document.getElementById("modal-body"), cartList.toString());
+                cartList = [];
             }, false);
             document.getElementById("cart").append(qrCodeButton);
         } else {
