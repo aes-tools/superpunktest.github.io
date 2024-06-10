@@ -136,12 +136,12 @@ function createCart() {
                     cartItemButton = document.createElement("div"),
                     productButton = document.createElement("button");
 
-                cartRow.classList.add("row", "align-items-center", "text-center", "product-row");
+                cartRow.classList.add("row", "align-items-center", "text-center", "product-row", "justify-content-center");
                 cartItemImage.classList.add("col-4");
                 cartItemTitle.classList.add("col-12");
                 titleAndPriceRow.classList.add("row", "col-8");
                 cartItemPrice.classList.add("col-12");
-                quantityAndButtonRow.classList.add("row");
+                quantityAndButtonRow.classList.add("row", "cart-button-row");
                 cartQuantityBox.classList.add("col-6");
                 productImage.setAttribute("src", "images/patches/" + value.image);
                 productImage.classList.add("img-fluid");
