@@ -31,7 +31,11 @@ body {
 }
 
 .cart-quantity-input {
-    width: 30%;
+    width: 60%;
     margin: auto;
     text-align:center;
+}
+
+.cart-button {
+    width: 100%;
 }

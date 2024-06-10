@@ -132,7 +132,9 @@ function createCart() {
                     productPrice = document.createElement("p"),
                     quantityAndButtonRow = document.createElement("div"),
                     cartQuantityBox = document.createElement("div"),
-                    productQuantityBox = document.createElement("input");
+                    productQuantityBox = document.createElement("input"),
+                    cartItemButton = document.createElement("div"),
+                    productButton = document.createElement("button");
 
                 cartRow.classList.add("row", "align-items-center", "text-center");
                 cartItemImage.classList.add("col-4");
@@ -154,9 +156,47 @@ function createCart() {
                 productQuantityBox.setAttribute('type', 'number');
                 productQuantityBox.setAttribute('value', purchaseList[key]);
                 productQuantityBox.setAttribute('id', value.sku);
+                cartItemButton.classList.add("col-6");
+                productButton.classList.add("btn", "btn-dark", "cart-button");
+                productButton.setAttribute("data-bs-toggle", "modal");
+                productButton.setAttribute("data-bs-target", "#exampleModal");
+                productButton.setAttribute('value', value.sku);
+                productButton.appendChild(document.createTextNode("Update Cart"));
+
                 cartQuantityBox.append(productQuantityBox);
+                cartItemButton.append(productButton);
+
+                productButton.addEventListener('click', function () {
+                    const dialog = document.getElementById("modal-body");
+                    while (dialog.firstChild) {
+                        dialog.removeChild(dialog.firstChild);
+                    }
+                    const updatedDialog = document.createElement("p");
+                    updatedDialog.classList.add("wrap");
+                    dialog.appendChild(updatedDialog);
+                    const quantity = document.getElementById(this.value).value;
+                    const productCode = this.value;
+                    if (purchaseList[productCode]) {
+                        if (quantity > 0) {
+                        purchaseList[productCode] = parseInt(quantity);
+                        localStorage.setItem("products", JSON.stringify(purchaseList));
+                        console.log("success");
+                        } else {
+                            delete purchaseList[productCode];
+                            localStorage.setItem("products", JSON.stringify(purchaseList));
+                            while (document.getElementById("cart").firstChild) {
+                                document.getElementById("cart").removeChild(document.getElementById("cart").firstChild);
+                            }
+                            createCart();
+                        }
+                    } else {
+                        purchaseList[productCode] = parseInt(quantity);
+                    }
+                    updatedDialog.appendChild(document.createTextNode(quantity + " x " + value.band + " added to your list."));
+                }, false);
 
                 quantityAndButtonRow.append(cartQuantityBox);
+                quantityAndButtonRow.append(cartItemButton);
 
                 cartRow.append(cartItemImage);
                 cartRow.append(titleAndPriceRow);
@@ -168,6 +208,24 @@ function createCart() {
     }
 }
 
+/*
+addToCartButton.addEventListener('click', function () {
+    const dialog = document.getElementById("modal-body");
+    while (dialog.firstChild) {
+        dialog.removeChild(dialog.firstChild);
+    }
+    const updatedDialog = document.createElement("p");
+    updatedDialog.classList.add("wrap");
+    dialog.appendChild(updatedDialog);
+    const quantity = document.getElementById(this.value).value;
+    const productCode = this.value;
+    if (purchaseList[productCode]) {
+        purchaseList[productCode] += parseInt(quantity);
+    } else {
+        purchaseList[productCode] = parseInt(quantity);
+    }
+    updatedDialog.appendChild(document.createTextNode(quantity + " x " + patch.band + " added to your list."));
+}, false);*/
 /*
 find items that are in purchase list and match them to item list based on object key value
 list each one on their own row on the cart page, pulling info from item array (images, patch name, price) and purchaseList info (quantity)*/
