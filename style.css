@@ -6,14 +6,6 @@ body {
     padding: 10px;  
 }
 
-.row {
-    border: 1px solid black;
-}
-
-.col-sm {
-    border: 1px solid red;
-}
-
 
 .product-image {
     width: 75%;
@@ -38,4 +30,11 @@ body {
 
 .cart-button {
     width: 100%;
+}
+
+.product-row {
+    border: 1px solid lightgrey;
+    border-radius: 5px;
+    background-color: whitesmoke;
+    margin: 1rem;
 }

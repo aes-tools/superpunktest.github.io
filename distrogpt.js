@@ -118,13 +118,13 @@ function addProducts() {
 
 function createCart() {
     for (const key in purchaseList) {
-     //   document.getElementById("cart").append(purchaseList[key] + key + ",");
+        //   document.getElementById("cart").append(purchaseList[key] + key + ",");
         for (const value of patches) {
             if (value.sku == key) {
                 const cartBody = document.getElementById("cart"),
                     cartRow = document.createElement("div"),
                     cartItemImage = document.createElement("div"),
-                    productImage = document.createElement("img"), 
+                    productImage = document.createElement("img"),
                     titleAndPriceRow = document.createElement("div"),
                     cartItemTitle = document.createElement("div"),
                     productTitle = document.createElement("p"),
@@ -136,7 +136,7 @@ function createCart() {
                     cartItemButton = document.createElement("div"),
                     productButton = document.createElement("button");
 
-                cartRow.classList.add("row", "align-items-center", "text-center");
+                cartRow.classList.add("row", "align-items-center", "text-center", "product-row");
                 cartItemImage.classList.add("col-4");
                 cartItemTitle.classList.add("col-12");
                 titleAndPriceRow.classList.add("row", "col-8");
@@ -178,21 +178,22 @@ function createCart() {
                     const productCode = this.value;
                     if (purchaseList[productCode]) {
                         if (quantity > 0) {
-                        purchaseList[productCode] = parseInt(quantity);
-                        localStorage.setItem("products", JSON.stringify(purchaseList));
-                        console.log("success");
+                            purchaseList[productCode] = parseInt(quantity);
+                            localStorage.setItem("products", JSON.stringify(purchaseList));
+                            updatedDialog.appendChild(document.createTextNode("You now have " + quantity + " x " + value.band + " on your list."));
+                            console.log("success");
                         } else {
                             delete purchaseList[productCode];
                             localStorage.setItem("products", JSON.stringify(purchaseList));
                             while (document.getElementById("cart").firstChild) {
                                 document.getElementById("cart").removeChild(document.getElementById("cart").firstChild);
                             }
+                            updatedDialog.appendChild(document.createTextNode(value.band + " removed from your list."));
                             createCart();
                         }
                     } else {
                         purchaseList[productCode] = parseInt(quantity);
                     }
-                    updatedDialog.appendChild(document.createTextNode(quantity + " x " + value.band + " added to your list."));
                 }, false);
 
                 quantityAndButtonRow.append(cartQuantityBox);
@@ -202,7 +203,7 @@ function createCart() {
                 cartRow.append(titleAndPriceRow);
                 cartRow.append(quantityAndButtonRow);
                 cartBody.append(cartRow);
-               //document.getElementById("cart").append(value.band + " ");
+                //document.getElementById("cart").append(value.band + " ");
             }
         }
     }
