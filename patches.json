@@ -1,4 +1,16 @@
     [{
+        "band": "Sacrilege Shirt",
+        "price": "15.00",
+        "image": "sacrilege-shirt.jpg",
+        "sku": "S02"
+    },
+    {
+        "band": "Dsiclose Shirt",
+        "price": "15.00",
+        "image": "disclose-shirt.jpg",
+        "sku": "D05"
+    },
+        {
         "band": "Amebix - No Gods No Masters",
         "price": "2.00",
         "image": "amebix-ngnm.jpg",
