@@ -27,14 +27,14 @@ async function patchesListing() {
     }
 }
 
-patchesListing();
-
 if (localStorage.getItem("products")) {
     purchaseList = localStorage.getItem("products");
     purchaseList = JSON.parse(purchaseList);
 } else {
     purchaseList = {};
 }
+
+patchesListing();
 
 function addProducts() {
     const patchContainer = document.getElementById("patches");
