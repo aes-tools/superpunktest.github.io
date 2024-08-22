@@ -1,11 +1,19 @@
 let patches = [];
 
 async function patchesListing() {
-    let shopContentsResponse = await fetch('./patches.json');
-    let shopContents = await shopContentsResponse.json();
-    console.log(shopContents);
-    patches = shopContents;
     const currentPage = document.title.split(" - ").slice(1)[0];
+    if (currentPage == "Patches") { 
+        let shopContentsResponse = await fetch('./patches.json');
+        let shopContents = await shopContentsResponse.json();
+        console.log(shopContents);
+        patches = shopContents;
+    } else if (currentPage =="Shirts") {
+        let shopContentsResponse = await fetch('./shirts.json');
+        let shopContents = await shopContentsResponse.json();
+        console.log(shopContents);
+        patches = shopContents;
+        
+    }
 
     if (currentPage == "Patches" || currentPage == "Shirts") {
         addProducts();
