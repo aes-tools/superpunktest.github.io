@@ -1,24 +1,72 @@
     [{
-        "band": "Leftover Crack",
+        "band": "Amebix - No Gods No Masters",
         "price": "2.00",
-        "image": "loc.jpg",
+        "image": "amebix-ngnm.jpg",
         "sku": "L01"
     },
     {
-        "band": "Leftover Crack 2",
+        "band": "Amebix",
         "price": "2.00",
-        "image": "loc2.png",
+        "image": "amebix.jpg",
         "sku": "L02"
     },
     {
-        "band": "Leftover Crack 3",
+        "band": "Framtid",
         "price": "2.00",
-        "image": "loc2.png",
+        "image": "framtid.jpg",
         "sku": "L03"
     },
     {
-        "band": "Leftover Crack 4",
+        "band": "Discharge - Logo",
         "price": "2.00",
-        "image": "loc.jpg",
+        "image": "discharge-logo.jpg",
+        "sku": "L04"
+    },
+    {
+        "band": "Discharge - Skulls",
+        "price": "2.00",
+        "image": "discharge.jpg",
+        "sku": "L04"
+    },
+    {
+        "band": "Extreme Noise Terror",
+        "price": "2.00",
+        "image": "extreme-noise-terror.jpg",
+        "sku": "L04"
+    },
+    {
+        "band": "Sacrilege",
+        "price": "2.00",
+        "image": "sacrilege.jpg",
+        "sku": "L04"
+    },
+    {
+        "band": "Disclose",
+        "price": "2.00",
+        "image": "disclose.jpg",
+        "sku": "L04"
+    },
+    {
+        "band": "Nausea",
+        "price": "2.00",
+        "image": "nausea.jpg",
+        "sku": "L04"
+    },
+    {
+        "band": "Deviated Instinct",
+        "price": "2.00",
+        "image": "deviated-instinct.jpg",
+        "sku": "L04"
+    },
+    {
+        "band": "Anti-Cimex",
+        "price": "2.00",
+        "image": "anti-cimex.jpg",
+        "sku": "L04"
+    },
+    {
+        "band": "Fuck on the Beach",
+        "price": "2.00",
+        "image": "fotb.jpg",
         "sku": "L04"
     }]
