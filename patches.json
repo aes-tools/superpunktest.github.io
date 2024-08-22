@@ -2,71 +2,71 @@
         "band": "Amebix - No Gods No Masters",
         "price": "2.00",
         "image": "amebix-ngnm.jpg",
-        "sku": "L01"
+        "sku": "A01"
     },
     {
         "band": "Amebix",
         "price": "2.00",
         "image": "amebix.jpg",
-        "sku": "L02"
+        "sku": "A02"
     },
     {
         "band": "Framtid",
         "price": "2.00",
         "image": "framtid.jpg",
-        "sku": "L03"
+        "sku": "F01"
     },
     {
         "band": "Discharge - Logo",
         "price": "2.00",
         "image": "discharge-logo.jpg",
-        "sku": "L04"
+        "sku": "D01"
     },
     {
         "band": "Discharge - Skulls",
         "price": "2.00",
         "image": "discharge.jpg",
-        "sku": "L04"
+        "sku": "D02"
     },
     {
         "band": "Extreme Noise Terror",
         "price": "2.00",
         "image": "extreme-noise-terror.jpg",
-        "sku": "L04"
+        "sku": "E01"
     },
     {
         "band": "Sacrilege",
         "price": "2.00",
         "image": "sacrilege.jpg",
-        "sku": "L04"
+        "sku": "S01"
     },
     {
         "band": "Disclose",
         "price": "2.00",
         "image": "disclose.jpg",
-        "sku": "L04"
+        "sku": "D03"
     },
     {
         "band": "Nausea",
         "price": "2.00",
         "image": "nausea.jpg",
-        "sku": "L04"
+        "sku": "N01"
     },
     {
         "band": "Deviated Instinct",
         "price": "2.00",
         "image": "deviated-instinct.jpg",
-        "sku": "L04"
+        "sku": "D04"
     },
     {
         "band": "Anti-Cimex",
         "price": "2.00",
         "image": "anti-cimex.jpg",
-        "sku": "L04"
+        "sku": "A03"
     },
     {
         "band": "Fuck on the Beach",
         "price": "2.00",
         "image": "fotb.jpg",
-        "sku": "L04"
+        "sku": "F02"
     }]
