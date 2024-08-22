@@ -72,6 +72,23 @@ function addProducts() {
         productPrice.appendChild(document.createTextNode("$" + patch.price));
         newProduct.appendChild(productPrice);
 
+        const currentPage = document.title.split(" - ").slice(1)[0];
+        if (currentPage == "Shirts") {
+            const shirtSize = document.createElement("div");
+            shirtSize.classList.add("col-12", "d-flex", "justify-content-center", "text-center", "form-outline")
+            const sizeInput = document.createElement("select");
+            sizeInput.classList.add("quantity-input", "size-input", "form-control");
+            let sizeList = ["S", "M", "L", "XL"];
+            for (const i of sizeList) {
+                let option = document.createElement("option");
+                option.setAttribute('value', i);
+                option.append(i);
+                sizeInput.appendChild(option);
+            }
+            shirtSize.appendChild(sizeInput);
+            newProduct.appendChild(shirtSize);
+        }
+
         const productQuantity = document.createElement("div");
         productQuantity.classList.add("col-12", "d-flex", "justify-content-center", "text-center", "form-outline");
         const quantityInput = document.createElement("input");
