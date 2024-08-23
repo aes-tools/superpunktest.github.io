@@ -99,6 +99,7 @@ function addProducts() {
             shirtSize.classList.add("col-12", "d-flex", "justify-content-center", "text-center", "form-outline")
             const sizeInput = document.createElement("select");
             sizeInput.classList.add("quantity-input", "size-input", "form-control");
+            sizeInput.setAttribute('id', patch.sku + "-Size");
             let sizeList = ["S", "M", "L", "XL"];
             for (const i of sizeList) {
                 let option = document.createElement("option");
@@ -141,8 +142,21 @@ function addProducts() {
             dialog.appendChild(updatedDialog);
             const quantity = document.getElementById(this.value).value;
             const productCode = this.value;
+            const productSizeId = this.value + "-Size";
+            if (document.getElementById(productSizeId)) { 
+                const productSize = document.getElementById(productSizeId).value;
+                console.log(productSize);
+                console.log(document.getElementById(this.value).value)
+            }
+
+            //TESTING ADDING SIZE TO PRODUCT VALUES
+            console.log(document.getElementById(this.value));
+
             if (purchaseList[productCode]) {
                 purchaseList[productCode] += parseInt(quantity);
+                if (document.getElementById(productSizeId)) { 
+                    purchaseList[productCode] += productSize;
+                }
             } else {
                 purchaseList[productCode] = parseInt(quantity);
             }
