@@ -1,19 +1,11 @@
 let patches = [];
 
 async function patchesListing() {
+    let shopContentsResponse = await fetch('./patches.json');
+    let shopContents = await shopContentsResponse.json();
+    console.log(shopContents);
+    patches = shopContents;
     const currentPage = document.title.split(" - ").slice(1)[0];
-    if (currentPage == "Patches") { 
-        let shopContentsResponse = await fetch('./patches.json');
-        let shopContents = await shopContentsResponse.json();
-        console.log(shopContents);
-        patches = shopContents;
-    } else if (currentPage =="Shirts") {
-        let shopContentsResponse = await fetch('./shirts.json');
-        let shopContents = await shopContentsResponse.json();
-        console.log(shopContents);
-        patches = shopContents;
-        
-    }
 
     if (currentPage == "Patches" || currentPage == "Shirts") {
         addProducts();
@@ -27,6 +19,36 @@ async function patchesListing() {
     }
 }
 
+async function shirtsListing() {
+    let shopContentsResponse = await fetch('./shirts.json');
+    let shopContents = await shopContentsResponse.json();
+    console.log(shopContents);
+    patches = shopContents;
+    const currentPage = document.title.split(" - ").slice(1)[0];
+
+    if (currentPage == "Patches" || currentPage == "Shirts") {
+        addProducts();
+        const modalButton = document.getElementById("exampleModal");
+
+        modalButton.addEventListener('click', function () {
+            localStorage.setItem("products", JSON.stringify(purchaseList));
+        }, false);
+    } else if (currentPage == "Cart") {
+        createCart();
+    }
+}
+
+
+const currentPage = document.title.split(" - ").slice(1)[0];
+
+if (currentPage =="Patches") {
+    patchesListing();
+} else if (currentPage == "Shirts") {
+    shirtsListing();
+} else {
+    createCart();
+}
+
 if (localStorage.getItem("products")) {
     purchaseList = localStorage.getItem("products");
     purchaseList = JSON.parse(purchaseList);
@@ -34,11 +56,10 @@ if (localStorage.getItem("products")) {
     purchaseList = {};
 }
 
-patchesListing();
-
 function addProducts() {
     const patchContainer = document.getElementById("patches");
     const imagePrefix = "images/patches/";
+
 
     for (let i = 0; i < patches.length; i++) {
         const patch = patches[i];
@@ -71,23 +92,6 @@ function addProducts() {
         productPrice.classList.add("col-12", "d-flex", "justify-content-center", "text-center");
         productPrice.appendChild(document.createTextNode("$" + patch.price));
         newProduct.appendChild(productPrice);
-
-        const currentPage = document.title.split(" - ").slice(1)[0];
-        if (currentPage == "Shirts") {
-            const shirtSize = document.createElement("div");
-            shirtSize.classList.add("col-12", "d-flex", "justify-content-center", "text-center", "form-outline")
-            const sizeInput = document.createElement("select");
-            sizeInput.classList.add("quantity-input", "size-input", "form-control");
-            let sizeList = ["S", "M", "L", "XL"];
-            for (const i of sizeList) {
-                let option = document.createElement("option");
-                option.setAttribute('value', i);
-                option.append(i);
-                sizeInput.appendChild(option);
-            }
-            shirtSize.appendChild(sizeInput);
-            newProduct.appendChild(shirtSize);
-        }
 
         const productQuantity = document.createElement("div");
         productQuantity.classList.add("col-12", "d-flex", "justify-content-center", "text-center", "form-outline");
@@ -141,7 +145,17 @@ function addProducts() {
     }
 }
 
-function createCart() {
+async function createCart() {
+    let shopContentsResponse = await fetch('./shirts.json');
+    let shopContents = await shopContentsResponse.json();
+    console.log(shopContents);
+    patches = shopContents;
+    shopContentsResponse = await fetch('./patches.json');
+    shopContents = await shopContentsResponse.json();
+   for (const i of shopContents) {
+    patches.push(i)
+   }
+    console.log(patches)
     if (localStorage.getItem("products")) {
         for (const key in purchaseList) {
             //   document.getElementById("cart").append(purchaseList[key] + key + ",");
